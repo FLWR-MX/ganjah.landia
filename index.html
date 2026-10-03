@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#174f2a">
+  <meta name="description" content="Ganjahlandia — catálogo y tienda online.">
+  <title>Ganjahlandia | Catálogo</title>
+  <link rel="icon" href="assets/logo.jpeg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="ageGate" class="age-gate" aria-modal="true" role="dialog">
+    <div class="age-card">
+      <img src="assets/logo.jpeg" alt="Ganjahlandia" class="age-logo">
+      <h2>Bienvenido a Ganjahlandia</h2>
+      <p>Este sitio puede incluir productos sujetos a restricciones de edad y/o regulación local.</p>
+      <p class="small">Confirma que tienes la edad legal aplicable en tu jurisdicción para continuar.</p>
+      <div class="age-actions">
+        <button id="ageYes" class="btn btn-primary">Sí, continuar</button>
+        <button id="ageNo" class="btn btn-ghost">Salir</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="announcement">🌿 Ganjahlandia · Catálogo independiente · Compra responsable</div>
+    <div class="nav-wrap container">
+      <a href="#inicio" class="brand" aria-label="Ganjahlandia inicio">
+        <img src="assets/logo.jpeg" alt="Logo Ganjahlandia">
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">☰</button>
+      <nav id="mainNav">
+        <a href="#inicio">Inicio</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <button class="cart-btn" id="cartBtn" aria-label="Abrir carrito">
+        🛒 <span>Carrito</span> <b id="cartCount">0</b>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero container">
+      <div class="hero-copy">
+        <span class="eyebrow">TU MUNDO · TU ESTILO</span>
+        <h1>Bienvenido a<br><span>Ganjahlandia</span></h1>
+        <p>Un catálogo con personalidad, diseño limpio y una experiencia pensada primero para celular.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#catalogo">Ver catálogo</a>
+          <a class="btn btn-ghost" href="#nosotros">Conócenos</a>
+        </div>
+        <div class="trust-row">
+          <span>✓ Catálogo editable</span>
+          <span>✓ Diseño responsive</span>
+          <span>✓ Sin frameworks</span>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="leaf-orb">🌿</div>
+        <div class="hero-card">
+          <img src="assets/logo.jpeg" alt="Ganjahlandia">
+          <strong>Ganjahlandia</strong>
+          <span>Hecho para tu marca.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="categories container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">EXPLORA</span>
+          <h2>Categorías</h2>
+        </div>
+      </div>
+      <div class="category-grid">
+        <button class="category-card" data-category="Accesorios">🧰<span>Accesorios</span></button>
+        <button class="category-card" data-category="Lifestyle">✨<span>Lifestyle</span></button>
+        <button class="category-card" data-category="Almacenamiento">📦<span>Almacenamiento</span></button>
+        <button class="category-card" data-category="Otros">🌱<span>Otros</span></button>
+      </div>
+    </section>
+
+    <section id="catalogo" class="catalog container">
+      <div class="section-head catalog-head">
+        <div>
+          <span class="eyebrow">CATÁLOGO</span>
+          <h2>Productos destacados</h2>
+        </div>
+        <div class="catalog-tools">
+          <label class="search">
+            <span>⌕</span>
+            <input id="searchInput" type="search" placeholder="Buscar producto...">
+          </label>
+          <select id="categoryFilter" aria-label="Filtrar categoría">
+            <option value="Todos">Todas</option>
+            <option value="Accesorios">Accesorios</option>
+            <option value="Lifestyle">Lifestyle</option>
+            <option value="Almacenamiento">Almacenamiento</option>
+            <option value="Otros">Otros</option>
+          </select>
+          <select id="sortFilter" aria-label="Ordenar">
+            <option value="featured">Destacados</option>
+            <option value="priceAsc">Precio: menor a mayor</option>
+            <option value="priceDesc">Precio: mayor a menor</option>
+            <option value="name">Nombre A-Z</option>
+          </select>
+        </div>
+      </div>
+      <div id="productGrid" class="product-grid"></div>
+      <p id="emptyState" class="empty hidden">No encontramos productos con esos filtros.</p>
+    </section>
+
+    <section id="nosotros" class="story">
+      <div class="container story-grid">
+        <div>
+          <span class="eyebrow">GANJAHLANDIA</span>
+          <h2>Una tienda que se siente como tu marca.</h2>
+          <p>Esta V1 está pensada como una base ligera: puedes cambiar productos, precios, categorías, textos y fotografías desde un solo archivo sin tocar la estructura de la página.</p>
+          <div class="feature-list">
+            <div><b>01</b><span>Catálogo centralizado</span></div>
+            <div><b>02</b><span>Carrito local en el navegador</span></div>
+            <div><b>03</b><span>Diseño adaptable a celular</span></div>
+          </div>
+        </div>
+        <div class="story-box">
+          <img src="assets/logo.jpeg" alt="Logo Ganjahlandia">
+          <p>“Tu mundo, tu estilo.”</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="faq container">
+      <div class="section-head"><div><span class="eyebrow">AYUDA</span><h2>Preguntas frecuentes</h2></div></div>
+      <details><summary>¿Puedo cambiar todos los productos?</summary><p>Sí. Edita <code>products.js</code> y reemplaza los productos de demostración por tu catálogo autorizado.</p></details>
+      <details><summary>¿El carrito ya cobra al cliente?</summary><p>No. Esta V1 incluye un carrito funcional para demostración, pero no procesa pagos ni pedidos. Antes de habilitar ventas debes definir proveedor, facturación, envíos, edad y cumplimiento legal.</p></details>
+      <details><summary>¿Puedo agregar mi dominio?</summary><p>Sí. La versión estática puede desplegarse en un servicio de hosting estático y después conectarse a un dominio propio.</p></details>
+    </section>
+
+    <section id="contacto" class="contact container">
+      <div>
+        <span class="eyebrow">CONTACTO</span>
+        <h2>¿Tienes una pregunta?</h2>
+        <p>Reemplaza este bloque con tus datos reales de contacto, redes sociales y horarios.</p>
+      </div>
+      <div class="contact-card">
+        <a href="mailto:hola@ganjahlandia.example">✉ hola@ganjahlandia.example</a>
+        <a href="#" onclick="return false">📲 WhatsApp: agrega tu número</a>
+        <span>📍 México</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <img src="assets/logo.jpeg" alt="Ganjahlandia">
+        <p>© <span id="year"></span> Ganjahlandia. Todos los derechos reservados.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#faq">Preguntas frecuentes</a>
+        <a href="#">Aviso de privacidad</a>
+        <a href="#">Términos</a>
+      </div>
+    </div>
+  </footer>
+
+  <aside id="cartDrawer" class="drawer" aria-hidden="true">
+    <div class="drawer-head"><h2>Tu carrito</h2><button id="closeCart" aria-label="Cerrar">×</button></div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-footer">
+      <div class="cart-total"><span>Total</span><strong id="cartTotal">$0</strong></div>
+      <button class="btn btn-primary btn-block" id="checkoutBtn">Continuar</button>
+      <p class="legal-note">Checkout deshabilitado en V1. Esta demo no procesa pagos ni pedidos.</p>
+    </div>
+  </aside>
+  <div id="drawerBackdrop" class="backdrop"></div>
+
+  <div id="productModal" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="closeModal">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="products.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
