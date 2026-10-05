@@ -1,192 +1,1565 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#174f2a">
-  <meta name="description" content="Ganjahlandia — catálogo y tienda online.">
-  <title>Ganjahlandia | Catálogo</title>
-  <link rel="icon" href="assets/logo.jpeg">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div id="ageGate" class="age-gate" aria-modal="true" role="dialog">
-    <div class="age-card">
-      <img src="assets/logo.jpeg" alt="Ganjahlandia" class="age-logo">
-      <h2>Bienvenido a Ganjahlandia</h2>
-      <p>Este sitio puede incluir productos sujetos a restricciones de edad y/o regulación local.</p>
-      <p class="small">Confirma que tienes la edad legal aplicable en tu jurisdicción para continuar.</p>
-      <div class="age-actions">
-        <button id="ageYes" class="btn btn-primary">Sí, continuar</button>
-        <button id="ageNo" class="btn btn-ghost">Salir</button>
-      </div>
-    </div>
-  </div>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#174f2a">
+<title>Ganjahlandia | Tu mundo, tu estilo</title>
 
-  <header class="site-header">
-    <div class="announcement">🌿 Ganjahlandia · Catálogo independiente · Compra responsable</div>
-    <div class="nav-wrap container">
-      <a href="#inicio" class="brand" aria-label="Ganjahlandia inicio">
-        <img src="assets/logo.jpeg" alt="Logo Ganjahlandia">
-      </a>
-      <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">☰</button>
-      <nav id="mainNav">
-        <a href="#inicio">Inicio</a>
-        <a href="#catalogo">Catálogo</a>
-        <a href="#nosotros">Nosotros</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
-      <button class="cart-btn" id="cartBtn" aria-label="Abrir carrito">
-        🛒 <span>Carrito</span> <b id="cartCount">0</b>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --green:#164f2b;
+  --green2:#286d3d;
+  --lime:#cbdc4b;
+  --yellow:#f5d83c;
+  --cream:#fffdf5;
+  --dark:#172019;
+  --muted:#697169;
+  --white:#fff;
+  --line:#e5e8dc;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--cream);
+  color:var(--dark);
+}
+
+a{text-decoration:none;color:inherit}
+
+button,input,select{font:inherit}
+
+.container{
+  width:min(1150px,92%);
+  margin:auto;
+}
+
+/* HEADER */
+
+.announcement{
+  background:var(--green);
+  color:white;
+  text-align:center;
+  padding:9px;
+  font-size:12px;
+  letter-spacing:1px;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(255,253,245,.96);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  gap:30px;
+}
+
+.logo{
+  font-weight:900;
+  font-size:25px;
+  color:var(--green);
+  white-space:nowrap;
+}
+
+.logo span{
+  color:#b5c82f;
+}
+
+nav{
+  display:flex;
+  gap:25px;
+  flex:1;
+}
+
+nav a{
+  font-size:14px;
+  font-weight:bold;
+}
+
+nav a:hover{
+  color:var(--green2);
+}
+
+.cart-button{
+  border:0;
+  background:var(--green);
+  color:white;
+  border-radius:12px;
+  padding:11px 16px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+#cartCount{
+  background:var(--yellow);
+  color:var(--green);
+  border-radius:50px;
+  padding:2px 7px;
+  margin-left:4px;
+}
+
+/* HERO */
+
+.hero{
+  min-height:650px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  align-items:center;
+}
+
+.eyebrow{
+  color:var(--green2);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:3px;
+}
+
+.hero h1{
+  font-family:Georgia,serif;
+  font-size:clamp(50px,7vw,85px);
+  line-height:.95;
+  margin:18px 0;
+}
+
+.hero h1 span{
+  color:var(--green2);
+}
+
+.hero p{
+  max-width:580px;
+  color:var(--muted);
+  line-height:1.7;
+  font-size:18px;
+}
+
+.buttons{
+  display:flex;
+  gap:12px;
+  margin-top:30px;
+}
+
+.btn{
+  padding:15px 22px;
+  border-radius:13px;
+  border:0;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.primary{
+  background:var(--green);
+  color:white;
+}
+
+.secondary{
+  background:white;
+  color:var(--green);
+  border:1px solid var(--line);
+}
+
+.hero-art{
+  display:grid;
+  place-items:center;
+}
+
+.circle{
+  width:min(410px,80vw);
+  height:min(410px,80vw);
+  border-radius:48% 52% 58% 42%;
+  background:radial-gradient(circle at 30% 25%,#edf59d,#bfd34d 45%,#57933e);
+  display:grid;
+  place-items:center;
+  font-size:130px;
+  transform:rotate(-8deg);
+  box-shadow:0 25px 70px rgba(22,79,43,.2);
+}
+
+/* CATEGORIES */
+
+section{
+  scroll-margin-top:90px;
+}
+
+.section{
+  padding:80px 0;
+}
+
+.section-title{
+  margin-bottom:30px;
+}
+
+.section-title h2{
+  font-family:Georgia,serif;
+  font-size:42px;
+  margin-top:10px;
+}
+
+.categories{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.category{
+  background:white;
+  border:1px solid var(--line);
+  padding:25px;
+  border-radius:20px;
+  cursor:pointer;
+  transition:.2s;
+  font-size:30px;
+  text-align:left;
+}
+
+.category:hover{
+  transform:translateY(-4px);
+  box-shadow:0 15px 40px rgba(22,79,43,.1);
+}
+
+.category strong{
+  display:block;
+  font-size:15px;
+  margin-top:15px;
+}
+
+/* PRODUCTS */
+
+.catalog-tools{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:25px;
+}
+
+.search{
+  flex:1;
+  min-width:200px;
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  outline:none;
+}
+
+select{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:12px;
+  background:white;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.product{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:22px;
+  overflow:hidden;
+  transition:.2s;
+}
+
+.product:hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 50px rgba(22,79,43,.12);
+}
+
+.product-image{
+  height:260px;
+  background:linear-gradient(140deg,#eef3cf,#d2e29a);
+  display:grid;
+  place-items:center;
+  font-size:80px;
+}
+
+.product-info{
+  padding:20px;
+}
+
+.product-category{
+  color:var(--green2);
+  font-size:10px;
+  letter-spacing:2px;
+  font-weight:bold;
+}
+
+.product h3{
+  margin:9px 0;
+  font-size:19px;
+}
+
+.product p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.5;
+  min-height:40px;
+}
+
+.price-row{
+  margin-top:18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.price{
+  font-size:20px;
+  font-weight:900;
+}
+
+.add{
+  border:0;
+  background:var(--green);
+  color:white;
+  border-radius:10px;
+  padding:10px 14px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+/* STORY */
+
+.story{
+  background:var(--green);
+  color:white;
+  padding:90px 0;
+}
+
+.story-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
+}
+
+.story h2{
+  font-family:Georgia,serif;
+  font-size:50px;
+  margin:15px 0;
+}
+
+.story p{
+  color:#dbe8dd;
+  line-height:1.7;
+}
+
+.story-card{
+  background:var(--yellow);
+  color:var(--green);
+  padding:60px 30px;
+  border-radius:30px;
+  text-align:center;
+  font-size:45px;
+  font-weight:900;
+}
+
+/* FAQ */
+
+details{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:20px;
+  margin:10px 0;
+}
+
+summary{
+  cursor:pointer;
+  font-weight:bold;
+}
+
+details p{
+  margin-top:15px;
+  color:var(--muted);
+  line-height:1.6;
+}
+
+/* FOOTER */
+
+footer{
+  background:#102f1b;
+  color:white;
+  padding:45px 0;
+}
+
+footer p{
+  color:#b9c9bb;
+  font-size:12px;
+  margin-top:10px;
+}
+
+/* CART */
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:none;
+  z-index:50;
+}
+
+.overlay.active{
+  display:block;
+}
+
+.cart{
+  position:fixed;
+  top:0;
+  right:-430px;
+  width:min(430px,94vw);
+  height:100vh;
+  background:white;
+  z-index:60;
+  transition:.3s;
+  display:flex;
+  flex-direction:column;
+}
+
+.cart.active{
+  right:0;
+}
+
+.cart-header{
+  padding:25px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+}
+
+.close{
+  border:0;
+  background:none;
+  font-size:28px;
+  cursor:pointer;
+}
+
+.cart-items{
+  flex:1;
+  overflow:auto;
+  padding:20px;
+}
+
+.cart-item{
+  display:grid;
+  grid-template-columns:55px 1fr auto;
+  gap:12px;
+  align-items:center;
+  border-bottom:1px solid var(--line);
+  padding:15px 0;
+}
+
+.cart-emoji{
+  width:55px;
+  height:55px;
+  background:#e9efcf;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  font-size:25px;
+}
+
+.qty{
+  display:flex;
+  gap:8px;
+  margin-top:7px;
+  align-items:center;
+}
+
+.qty button{
+  width:25px;
+  height:25px;
+  border:1px solid var(--line);
+  background:white;
+  border-radius:7px;
+  cursor:pointer;
+}
+
+.cart-footer{
+  border-top:1px solid var(--line);
+  padding:20px;
+}
+
+.total{
+  display:flex;
+  justify-content:space-between;
+  font-size:20px;
+  margin-bottom:15px;
+}
+
+.full{
+  width:100%;
+}
+
+.notice{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:12px;
+  line-height:1.5;
+}
+
+/* AGE */
+
+.age{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:rgba(10,30,15,.9);
+  display:grid;
+  place-items:center;
+  padding:20px;
+}
+
+.age-box{
+  max-width:460px;
+  background:var(--cream);
+  border-radius:25px;
+  padding:35px;
+  text-align:center;
+}
+
+.age-box h2{
+  font-family:Georgia,serif;
+  font-size:32px;
+  margin:15px 0;
+}
+
+.age-box p{
+  color:var(--muted);
+  line-height:1.6;
+}
+
+.age-buttons{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  margin-top:25px;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+  nav{
+    display:none;
+  }
+
+  .hero{
+    grid-template-columns:1fr;
+    padding:60px 0;
+  }
+
+  .hero-art{
+    order:-1;
+  }
+
+  .circle{
+    width:280px;
+    height:280px;
+    font-size:90px;
+  }
+
+  .categories{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .products{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .story-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:520px){
+
+  .products{
+    grid-template-columns:1fr;
+  }
+
+  .categories{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .hero h1{
+    font-size:52px;
+  }
+
+  .story h2{
+    font-size:38px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- AVISO DE EDAD -->
+<div class="age" id="age">
+  <div class="age-box">
+    <div style="font-size:65px">🌿</div>
+    <h2>Bienvenido a Ganjahlandia</h2>
+    <p>
+      Este sitio puede contener productos sujetos a restricciones
+      de edad y regulación local.
+    </p>
+    <p style="font-size:12px;margin-top:10px">
+      Confirma que tienes la edad legal aplicable en tu jurisdicción.
+    </p>
+
+    <div class="age-buttons">
+      <button class="btn primary" onclick="enterSite()">
+        Sí, continuar
+      </button>
+
+      <button class="btn secondary" onclick="leaveSite()">
+        Salir
       </button>
     </div>
-  </header>
+  </div>
+</div>
 
-  <main>
-    <section id="inicio" class="hero container">
-      <div class="hero-copy">
-        <span class="eyebrow">TU MUNDO · TU ESTILO</span>
-        <h1>Bienvenido a<br><span>Ganjahlandia</span></h1>
-        <p>Un catálogo con personalidad, diseño limpio y una experiencia pensada primero para celular.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#catalogo">Ver catálogo</a>
-          <a class="btn btn-ghost" href="#nosotros">Conócenos</a>
-        </div>
-        <div class="trust-row">
-          <span>✓ Catálogo editable</span>
-          <span>✓ Diseño responsive</span>
-          <span>✓ Sin frameworks</span>
-        </div>
-      </div>
-      <div class="hero-art">
-        <div class="leaf-orb">🌿</div>
-        <div class="hero-card">
-          <img src="assets/logo.jpeg" alt="Ganjahlandia">
-          <strong>Ganjahlandia</strong>
-          <span>Hecho para tu marca.</span>
-        </div>
-      </div>
-    </section>
 
-    <section class="categories container">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">EXPLORA</span>
-          <h2>Categorías</h2>
-        </div>
-      </div>
-      <div class="category-grid">
-        <button class="category-card" data-category="Accesorios">🧰<span>Accesorios</span></button>
-        <button class="category-card" data-category="Lifestyle">✨<span>Lifestyle</span></button>
-        <button class="category-card" data-category="Almacenamiento">📦<span>Almacenamiento</span></button>
-        <button class="category-card" data-category="Otros">🌱<span>Otros</span></button>
-      </div>
-    </section>
+<div class="announcement">
+🌿 GANJAHLANDIA · TU MUNDO · TU ESTILO
+</div>
 
-    <section id="catalogo" class="catalog container">
-      <div class="section-head catalog-head">
-        <div>
-          <span class="eyebrow">CATÁLOGO</span>
-          <h2>Productos destacados</h2>
-        </div>
-        <div class="catalog-tools">
-          <label class="search">
-            <span>⌕</span>
-            <input id="searchInput" type="search" placeholder="Buscar producto...">
-          </label>
-          <select id="categoryFilter" aria-label="Filtrar categoría">
-            <option value="Todos">Todas</option>
-            <option value="Accesorios">Accesorios</option>
-            <option value="Lifestyle">Lifestyle</option>
-            <option value="Almacenamiento">Almacenamiento</option>
-            <option value="Otros">Otros</option>
-          </select>
-          <select id="sortFilter" aria-label="Ordenar">
-            <option value="featured">Destacados</option>
-            <option value="priceAsc">Precio: menor a mayor</option>
-            <option value="priceDesc">Precio: mayor a menor</option>
-            <option value="name">Nombre A-Z</option>
-          </select>
-        </div>
-      </div>
-      <div id="productGrid" class="product-grid"></div>
-      <p id="emptyState" class="empty hidden">No encontramos productos con esos filtros.</p>
-    </section>
+<header>
+  <div class="container nav">
 
-    <section id="nosotros" class="story">
-      <div class="container story-grid">
-        <div>
-          <span class="eyebrow">GANJAHLANDIA</span>
-          <h2>Una tienda que se siente como tu marca.</h2>
-          <p>Esta V1 está pensada como una base ligera: puedes cambiar productos, precios, categorías, textos y fotografías desde un solo archivo sin tocar la estructura de la página.</p>
-          <div class="feature-list">
-            <div><b>01</b><span>Catálogo centralizado</span></div>
-            <div><b>02</b><span>Carrito local en el navegador</span></div>
-            <div><b>03</b><span>Diseño adaptable a celular</span></div>
-          </div>
-        </div>
-        <div class="story-box">
-          <img src="assets/logo.jpeg" alt="Logo Ganjahlandia">
-          <p>“Tu mundo, tu estilo.”</p>
-        </div>
-      </div>
-    </section>
+    <a href="#inicio" class="logo">
+      GANJAH<span>LANDIA</span>
+    </a>
 
-    <section id="faq" class="faq container">
-      <div class="section-head"><div><span class="eyebrow">AYUDA</span><h2>Preguntas frecuentes</h2></div></div>
-      <details><summary>¿Puedo cambiar todos los productos?</summary><p>Sí. Edita <code>products.js</code> y reemplaza los productos de demostración por tu catálogo autorizado.</p></details>
-      <details><summary>¿El carrito ya cobra al cliente?</summary><p>No. Esta V1 incluye un carrito funcional para demostración, pero no procesa pagos ni pedidos. Antes de habilitar ventas debes definir proveedor, facturación, envíos, edad y cumplimiento legal.</p></details>
-      <details><summary>¿Puedo agregar mi dominio?</summary><p>Sí. La versión estática puede desplegarse en un servicio de hosting estático y después conectarse a un dominio propio.</p></details>
-    </section>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
 
-    <section id="contacto" class="contact container">
-      <div>
-        <span class="eyebrow">CONTACTO</span>
-        <h2>¿Tienes una pregunta?</h2>
-        <p>Reemplaza este bloque con tus datos reales de contacto, redes sociales y horarios.</p>
-      </div>
-      <div class="contact-card">
-        <a href="mailto:hola@ganjahlandia.example">✉ hola@ganjahlandia.example</a>
-        <a href="#" onclick="return false">📲 WhatsApp: agrega tu número</a>
-        <span>📍 México</span>
-      </div>
-    </section>
-  </main>
+    <button class="cart-button" onclick="openCart()">
+      🛒 Carrito
+      <span id="cartCount">0</span>
+    </button>
 
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div>
-        <img src="assets/logo.jpeg" alt="Ganjahlandia">
-        <p>© <span id="year"></span> Ganjahlandia. Todos los derechos reservados.</p>
+  </div>
+</header>
+
+
+<main>
+
+<!-- HERO -->
+
+<section id="inicio">
+  <div class="container hero">
+
+    <div>
+
+      <span class="eyebrow">
+        TU MUNDO · TU ESTILO
+      </span>
+
+      <h1>
+        Bienvenido a
+        <span>Ganjahlandia</span>
+      </h1>
+
+      <p>
+        Una experiencia creada alrededor de nuestra comunidad,
+        nuestro estilo y nuestros productos.
+      </p>
+
+      <div class="buttons">
+        <a href="#catalogo" class="btn primary">
+          Ver catálogo
+        </a>
+
+        <a href="#nosotros" class="btn secondary">
+          Conócenos
+        </a>
       </div>
-      <div class="footer-links">
-        <a href="#faq">Preguntas frecuentes</a>
-        <a href="#">Aviso de privacidad</a>
-        <a href="#">Términos</a>
+
+    </div>
+
+    <div class="hero-art">
+      <div class="circle">
+        🌿
       </div>
     </div>
-  </footer>
 
-  <aside id="cartDrawer" class="drawer" aria-hidden="true">
-    <div class="drawer-head"><h2>Tu carrito</h2><button id="closeCart" aria-label="Cerrar">×</button></div>
-    <div id="cartItems" class="cart-items"></div>
-    <div class="cart-footer">
-      <div class="cart-total"><span>Total</span><strong id="cartTotal">$0</strong></div>
-      <button class="btn btn-primary btn-block" id="checkoutBtn">Continuar</button>
-      <p class="legal-note">Checkout deshabilitado en V1. Esta demo no procesa pagos ni pedidos.</p>
-    </div>
-  </aside>
-  <div id="drawerBackdrop" class="backdrop"></div>
+  </div>
+</section>
 
-  <div id="productModal" class="modal" aria-hidden="true">
-    <div class="modal-card">
-      <button class="modal-close" id="closeModal">×</button>
-      <div id="modalContent"></div>
+
+<!-- CATEGORÍAS -->
+
+<section class="section">
+
+  <div class="container">
+
+    <div class="section-title">
+      <span class="eyebrow">EXPLORA</span>
+      <h2>Categorías</h2>
     </div>
+
+    <div class="categories">
+
+      <button class="category"
+        onclick="filterCategory('Accesorios')">
+        🧰
+        <strong>Accesorios</strong>
+      </button>
+
+      <button class="category"
+        onclick="filterCategory('Lifestyle')">
+        ✨
+        <strong>Lifestyle</strong>
+      </button>
+
+      <button class="category"
+        onclick="filterCategory('Almacenamiento')">
+        📦
+        <strong>Almacenamiento</strong>
+      </button>
+
+      <button class="category"
+        onclick="filterCategory('Otros')">
+        🌱
+        <strong>Otros</strong>
+      </button>
+
+    </div>
+
   </div>
 
-  <script src="products.js"></script>
-  <script src="app.js"></script>
+</section>
+
+
+<!-- CATÁLOGO -->
+
+<section id="catalogo" class="section">
+
+  <div class="container">
+
+    <div class="section-title">
+      <span class="eyebrow">CATÁLOGO</span>
+      <h2>Productos destacados</h2>
+    </div>
+
+    <div class="catalog-tools">
+
+      <input
+        class="search"
+        id="search"
+        type="search"
+        placeholder="Buscar producto..."
+        oninput="renderProducts()"
+      >
+
+      <select id="category"
+        onchange="renderProducts()">
+
+        <option value="Todos">
+          Todas las categorías
+        </option>
+
+        <option>Accesorios</option>
+        <option>Lifestyle</option>
+        <option>Almacenamiento</option>
+        <option>Otros</option>
+
+      </select>
+
+      <select id="sort"
+        onchange="renderProducts()">
+
+        <option value="featured">
+          Destacados
+        </option>
+
+        <option value="low">
+          Precio menor
+        </option>
+
+        <option value="high">
+          Precio mayor
+        </option>
+
+        <option value="name">
+          Nombre A-Z
+        </option>
+
+      </select>
+
+    </div>
+
+    <div id="products" class="products"></div>
+
+  </div>
+
+</section>
+
+
+<!-- NOSOTROS -->
+
+<section id="nosotros" class="story">
+
+  <div class="container story-grid">
+
+    <div>
+
+      <span class="eyebrow" style="color:#cbdc4b">
+        GANJAHLANDIA
+      </span>
+
+      <h2>
+        Una tienda que se siente como tu marca.
+      </h2>
+
+      <p>
+        Esta es la primera versión de Ganjahlandia.
+        La estructura está preparada para crecer:
+        catálogo, productos, carrito y posteriormente
+        las funciones de comercio electrónico que decidas incorporar.
+      </p>
+
+    </div>
+
+    <div class="story-card">
+      🌿
+      <br>
+      GANJAH<br>LANDIA
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FAQ -->
+
+<section id="faq" class="section">
+
+  <div class="container">
+
+    <div class="section-title">
+      <span class="eyebrow">AYUDA</span>
+      <h2>Preguntas frecuentes</h2>
+    </div>
+
+    <details>
+      <summary>
+        ¿Puedo cambiar los productos?
+      </summary>
+
+      <p>
+        Sí. Los productos están definidos dentro del código
+        en la sección PRODUCTS. Puedes cambiar nombre,
+        precio, categoría, descripción y emoji.
+      </p>
+    </details>
+
+    <details>
+      <summary>
+        ¿El carrito procesa pagos?
+      </summary>
+
+      <p>
+        No. El carrito de esta V1 es demostrativo.
+        El checkout está deliberadamente desactivado.
+      </p>
+    </details>
+
+    <details>
+      <summary>
+        ¿Puedo agregar fotografías?
+      </summary>
+
+      <p>
+        Sí. En la siguiente versión podemos incorporar
+        las fotografías reales de tu catálogo y convertir
+        las tarjetas en fichas de producto profesionales.
+      </p>
+    </details>
+
+  </div>
+
+</section>
+
+
+<!-- CONTACTO -->
+
+<section id="contacto" class="section">
+
+  <div class="container">
+
+    <div class="section-title">
+      <span class="eyebrow">CONTACTO</span>
+      <h2>Ganjahlandia</h2>
+    </div>
+
+    <p style="color:#697169;line-height:1.7">
+      Aquí puedes colocar posteriormente tu WhatsApp,
+      Instagram, correo electrónico y horarios.
+    </p>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+  <div class="container">
+
+    <strong>
+      GANJAH<span style="color:#cbdc4b">LANDIA</span>
+    </strong>
+
+    <p>
+      © <span id="year"></span> Ganjahlandia.
+      Todos los derechos reservados.
+    </p>
+
+  </div>
+
+</footer>
+
+
+<!-- CARRITO -->
+
+<div class="overlay" id="overlay"
+  onclick="closeCart()"></div>
+
+<aside class="cart" id="cart">
+
+  <div class="cart-header">
+
+    <h2>Tu carrito</h2>
+
+    <button class="close"
+      onclick="closeCart()">×</button>
+
+  </div>
+
+  <div class="cart-items" id="cartItems"></div>
+
+  <div class="cart-footer">
+
+    <div class="total">
+      <span>Total</span>
+      <strong id="total">$0 MXN</strong>
+    </div>
+
+    <button
+      class="btn primary full"
+      onclick="checkout()">
+      Continuar
+    </button>
+
+    <p class="notice">
+      Checkout deshabilitado en esta V1.
+      No se procesan pagos ni pedidos.
+    </p>
+
+  </div>
+
+</aside>
+
+
+<script>
+
+/* ============================
+   CATÁLOGO
+============================ */
+
+const PRODUCTS = [
+
+  {
+    id:1,
+    name:"Estuche Premium",
+    category:"Accesorios",
+    price:299,
+    emoji:"🧰",
+    description:"Estuche compacto para organizar accesorios personales.",
+    featured:true
+  },
+
+  {
+    id:2,
+    name:"Molinillo Clásico",
+    category:"Accesorios",
+    price:249,
+    emoji:"⚙️",
+    description:"Accesorio compacto de sobremesa.",
+    featured:true
+  },
+
+  {
+    id:3,
+    name:"Papel Premium",
+    category:"Lifestyle",
+    price:99,
+    emoji:"📜",
+    description:"Presentación minimalista para tu colección.",
+    featured:true
+  },
+
+  {
+    id:4,
+    name:"Tarro Hermético",
+    category:"Almacenamiento",
+    price:179,
+    emoji:"🫙",
+    description:"Contenedor reutilizable para almacenamiento.",
+    featured:false
+  },
+
+  {
+    id:5,
+    name:"Charola Ganjahlandia",
+    category:"Lifestyle",
+    price:399,
+    emoji:"🌿",
+    description:"Charola decorativa con estética Ganjahlandia.",
+    featured:true
+  },
+
+  {
+    id:6,
+    name:"Accesorio Lifestyle",
+    category:"Otros",
+    price:149,
+    emoji:"✨",
+    description:"Producto de demostración para tu catálogo.",
+    featured:false
+  }
+
+];
+
+
+/* ============================
+   CARRITO
+============================ */
+
+let cart =
+JSON.parse(
+  localStorage.getItem("ganjahlandia-cart") || "[]"
+);
+
+
+function money(value){
+
+  return new Intl.NumberFormat(
+    "es-MX",
+    {
+      style:"currency",
+      currency:"MXN",
+      maximumFractionDigits:0
+    }
+  ).format(value);
+
+}
+
+
+/* ============================
+   PRODUCTOS
+============================ */
+
+function renderProducts(){
+
+  const search =
+    document
+    .getElementById("search")
+    .value
+    .toLowerCase()
+    .trim();
+
+  const category =
+    document
+    .getElementById("category")
+    .value;
+
+  const sort =
+    document
+    .getElementById("sort")
+    .value;
+
+
+  let products =
+    PRODUCTS.filter(product => {
+
+      const matchesCategory =
+        category === "Todos" ||
+        product.category === category;
+
+      const text =
+        (
+          product.name +
+          " " +
+          product.category +
+          " " +
+          product.description
+        ).toLowerCase();
+
+      return (
+        matchesCategory &&
+        (!search || text.includes(search))
+      );
+
+    });
+
+
+  if(sort === "low"){
+    products.sort(
+      (a,b) => a.price - b.price
+    );
+  }
+
+  if(sort === "high"){
+    products.sort(
+      (a,b) => b.price - a.price
+    );
+  }
+
+  if(sort === "name"){
+    products.sort(
+      (a,b) =>
+      a.name.localeCompare(b.name)
+    );
+  }
+
+  if(sort === "featured"){
+    products.sort(
+      (a,b) =>
+      Number(b.featured) -
+      Number(a.featured)
+    );
+  }
+
+
+  const container =
+    document.getElementById("products");
+
+
+  container.innerHTML =
+    products.map(product => `
+
+      <article class="product">
+
+        <div class="product-image">
+          ${product.emoji}
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-category">
+            ${product.category}
+          </div>
+
+          <h3>
+            ${product.name}
+          </h3>
+
+          <p>
+            ${product.description}
+          </p>
+
+          <div class="price-row">
+
+            <span class="price">
+              ${money(product.price)}
+            </span>
+
+            <button
+              class="add"
+              onclick="addToCart(${product.id})">
+
+              Agregar
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    `).join("");
+
+}
+
+
+/* ============================
+   FILTRO CATEGORÍA
+============================ */
+
+function filterCategory(category){
+
+  document
+    .getElementById("category")
+    .value = category;
+
+  renderProducts();
+
+  document
+    .getElementById("catalogo")
+    .scrollIntoView();
+
+}
+
+
+/* ============================
+   AGREGAR
+============================ */
+
+function addToCart(id){
+
+  const existing =
+    cart.find(item => item.id === id);
+
+
+  if(existing){
+
+    existing.qty++;
+
+  }else{
+
+    cart.push({
+      id:id,
+      qty:1
+    });
+
+  }
+
+
+  saveCart();
+
+  openCart();
+
+}
+
+
+/* ============================
+   GUARDAR
+============================ */
+
+function saveCart(){
+
+  localStorage.setItem(
+    "ganjahlandia-cart",
+    JSON.stringify(cart)
+  );
+
+  renderCart();
+
+}
+
+
+/* ============================
+   RENDER CARRITO
+============================ */
+
+function renderCart(){
+
+  const count =
+    cart.reduce(
+      (sum,item) =>
+      sum + item.qty,
+      0
+    );
+
+  document
+    .getElementById("cartCount")
+    .textContent = count;
+
+
+  const container =
+    document.getElementById("cartItems");
+
+
+  if(!cart.length){
+
+    container.innerHTML =
+      `<p style="color:#697169;text-align:center;padding:40px">
+        Tu carrito está vacío.
+       </p>`;
+
+  }else{
+
+    container.innerHTML =
+      cart.map(item => {
+
+        const product =
+          PRODUCTS.find(
+            p => p.id === item.id
+          );
+
+        return `
+
+          <div class="cart-item">
+
+            <div class="cart-emoji">
+              ${product.emoji}
+            </div>
+
+            <div>
+
+              <strong>
+                ${product.name}
+              </strong>
+
+              <br>
+
+              <small>
+                ${money(product.price)}
+              </small>
+
+              <div class="qty">
+
+                <button
+                  onclick="changeQty(${product.id},-1)">
+                  −
+                </button>
+
+                <b>
+                  ${item.qty}
+                </b>
+
+                <button
+                  onclick="changeQty(${product.id},1)">
+                  +
+                </button>
+
+              </div>
+
+            </div>
+
+            <button
+              class="close"
+              style="font-size:18px"
+              onclick="removeItem(${product.id})">
+              ×
+            </button>
+
+          </div>
+
+        `;
+
+      }).join("");
+
+  }
+
+
+  const total =
+    cart.reduce(
+      (sum,item) => {
+
+        const product =
+          PRODUCTS.find(
+            p => p.id === item.id
+          );
+
+        return sum +
+          product.price *
+          item.qty;
+
+      },
+      0
+    );
+
+
+  document
+    .getElementById("total")
+    .textContent = money(total);
+
+}
+
+
+/* ============================
+   CANTIDAD
+============================ */
+
+function changeQty(id,amount){
+
+  const item =
+    cart.find(
+      item => item.id === id
+    );
+
+  if(!item)return;
+
+  item.qty += amount;
+
+  if(item.qty <= 0){
+
+    cart =
+      cart.filter(
+        item => item.id !== id
+      );
+
+  }
+
+  saveCart();
+
+}
+
+
+function removeItem(id){
+
+  cart =
+    cart.filter(
+      item => item.id !== id
+    );
+
+  saveCart();
+
+}
+
+
+/* ============================
+   CARRITO
+============================ */
+
+function openCart(){
+
+  document
+    .getElementById("cart")
+    .classList.add("active");
+
+  document
+    .getElementById("overlay")
+    .classList.add("active");
+
+}
+
+
+function closeCart(){
+
+  document
+    .getElementById("cart")
+    .classList.remove("active");
+
+  document
+    .getElementById("overlay")
+    .classList.remove("active");
+
+}
+
+
+/* ============================
+   CHECKOUT
+============================ */
+
+function checkout(){
+
+  alert(
+    "El checkout está deshabilitado en esta V1. " +
+    "Primero configura proveedor, legalidad, pagos y envíos."
+  );
+
+}
+
+
+/* ============================
+   EDAD
+============================ */
+
+function enterSite(){
+
+  localStorage.setItem(
+    "ganjahlandia-age",
+    "yes"
+  );
+
+  document
+    .getElementById("age")
+    .classList.add("hidden");
+
+}
+
+
+function leaveSite(){
+
+  document.body.innerHTML = `
+
+    <div style="
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      font-family:Arial;
+      text-align:center;
+      padding:30px">
+
+      <div>
+
+        <h1>
+          Gracias por visitarnos.
+        </h1>
+
+        <p style="color:#697169">
+          Puedes cerrar esta ventana.
+        </p>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* ============================
+   INICIO
+============================ */
+
+document
+  .getElementById("year")
+  .textContent =
+  new Date().getFullYear();
+
+
+if(
+  localStorage.getItem(
+    "ganjahlandia-age"
+  ) === "yes"
+){
+
+  document
+    .getElementById("age")
+    .classList.add("hidden");
+
+}
+
+
+renderProducts();
+
+renderCart();
+
+</script>
+
 </body>
 </html>
